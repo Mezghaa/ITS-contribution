@@ -75,6 +75,7 @@ public class GspnOrderGenerator implements IOrderGenerator{//utilise gal2PetriNe
 	@Override
 	public IOrder compute() {
 		// TODO Auto-generated method stub
+		System.out.println(heuri);
 		runner.run();
 		return  OrderFactory.create(vars,runner.getOrder(),heuri);
 		

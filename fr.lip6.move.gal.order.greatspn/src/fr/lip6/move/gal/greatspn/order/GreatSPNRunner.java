@@ -40,6 +40,23 @@ public class GreatSPNRunner {
 		config = new ArrayList<String>();
 		
 	}
+	public GreatSPNRunner(String workFolder, String modelPath) {//, String binPath
+		//String s;
+		
+		Scanner sc=new Scanner(System.in);
+//		System.out.println("saisir chemin bin");
+//		//System.out.print("\nEntrer une ligne : ");
+		String s=sc.nextLine(); 
+//		//System.out.println("La ligne est : "+s); } }
+		this.path = s;
+		//"/home/joseph/Documents/GreatSPN/usr/local/GreatSPN/bin/RGMEDD2";
+		//"/data/ythierry/gspn/usr/local/GreatSPN/bin/RGMEDD2";
+		//"/home/joe/Documents/LTSmin/greatSPN/usr/local/GreatSPN/bin/RGMEDD2
+		this.workFolder = workFolder;
+		this.modelPath = modelPath;
+		config = new ArrayList<String>();
+		
+	}
 	
 	public void configure(List<String> ohs) {
 		for(String oh : ohs)
