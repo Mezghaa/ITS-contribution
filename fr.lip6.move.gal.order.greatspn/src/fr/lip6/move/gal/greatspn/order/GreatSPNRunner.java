@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 import org.eclipse.core.runtime.IStatus;
 
-import fr.lip6.move.gal.greatspn.order.ajout.flag.OrderHeuristic;
 import fr.lip6.move.gal.itstools.CommandLine;
 import fr.lip6.move.gal.itstools.ProcessController.TimeOutException;
 import fr.lip6.move.gal.itstools.Runner;
@@ -23,30 +22,30 @@ public class GreatSPNRunner {
 	private String workFolder;
 	private String modelPath;
 	private String[] order;
-	private ArrayList<OrderHeuristic> config;
-	public GreatSPNRunner(String workFolder, String modelPath) {//, String binPath
+	private ArrayList<String> config;
+	public GreatSPNRunner(String workFolder, String modelPath,String path) {//, String binPath
 		//String s;
 		
-		Scanner sc=new Scanner(System.in);
-		System.out.println("saisir chemin bin");
-		//System.out.print("\nEntrer une ligne : ");
-		String s=sc.nextLine(); 
-		//System.out.println("La ligne est : "+s); } }
-		this.path =  s;
+//		Scanner sc=new Scanner(System.in);
+//		System.out.println("saisir chemin bin");
+//		//System.out.print("\nEntrer une ligne : ");
+//		String s=sc.nextLine(); 
+//		//System.out.println("La ligne est : "+s); } }
+		this.path = path;
 		//"/home/joseph/Documents/GreatSPN/usr/local/GreatSPN/bin/RGMEDD2";
 		//"/data/ythierry/gspn/usr/local/GreatSPN/bin/RGMEDD2";
 		//"/home/joe/Documents/LTSmin/greatSPN/usr/local/GreatSPN/bin/RGMEDD2
 		this.workFolder = workFolder;
 		this.modelPath = modelPath;
-		config = new ArrayList<OrderHeuristic>();
+		config = new ArrayList<String>();
 		
 	}
 	
-	public void configure(List<OrderHeuristic> ohs) {
-		for(OrderHeuristic oh : ohs)
+	public void configure(List<String> ohs) {
+		for(String oh : ohs)
 			config.add(oh);
 	}
-	public void configure(OrderHeuristic oh) {
+	public void configure(String oh) {
 			config.add(oh);
 	}
 
@@ -62,8 +61,8 @@ public class GreatSPNRunner {
 		cl.setWorkingDir(new File(workFolder));		
 		cl.addArg(path);
 		cl.addArg(modelPath);
-		for(OrderHeuristic oh : config)
-			cl.addArg(oh.toString());
+		for(String oh : config)
+			cl.addArg(oh);
 		//cl.addArg("-FR");
 		cl.addArg("-varord");
 		
@@ -82,7 +81,7 @@ public class GreatSPNRunner {
                 
 		          if (line.startsWith("VARORDER")) {
 		        	  line=line.replace("VARORDER:  ", "");
-		        	  String[] orders = line.split(", ");
+		        	  String[] orders = line.split(" ");
 		        	  this.order = orders;
 		        	  break;
 		          }

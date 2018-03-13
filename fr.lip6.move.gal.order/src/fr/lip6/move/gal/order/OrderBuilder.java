@@ -1,4 +1,4 @@
-package fr.lip6.move.gal.contribution.orders;
+package fr.lip6.move.gal.order;
 
 import fr.lip6.move.gal.Specification;
 import fr.lip6.move.gal.semantics.INextBuilder;

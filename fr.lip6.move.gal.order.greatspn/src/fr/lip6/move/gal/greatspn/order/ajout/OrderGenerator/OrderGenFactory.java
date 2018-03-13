@@ -8,13 +8,7 @@ public class OrderGenFactory {
 
 	public static IOrderGenerator build (OrderHeuristic oh,String workFolder, String modelPath) {
 		//config interface pour recup choix du runner + heuri
-		switch (oh) {
-		case IDENTITY:
-			return new GreatSPNOrderGen(workFolder, modelPath);
-		case FR:
-			return new GreatSPNOrderGen(workFolder, modelPath, oh);
-		default:
-			return new GreatSPNOrderGen(workFolder, modelPath);
-		}
+			return new GreatSPNOrderGen(workFolder, modelPath,oh);
+		
 	}
 }
