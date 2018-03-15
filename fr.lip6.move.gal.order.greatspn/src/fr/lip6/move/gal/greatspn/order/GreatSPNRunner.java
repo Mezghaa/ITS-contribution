@@ -3,17 +3,25 @@ package fr.lip6.move.gal.greatspn.order;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.runtime.IStatus;
 
-import fr.lip6.move.gal.itstools.CommandLine;
-import fr.lip6.move.gal.itstools.ProcessController.TimeOutException;
-import fr.lip6.move.gal.itstools.Runner;
+//import fr.lip6.move.gal.itstools.CommandLine;
+//import fr.lip6.move.gal.itstools.ProcessController.TimeOutException;
+//import fr.lip6.move.gal.itstools.Runner;
+
+import fr.lip6.move.gal.process.CommandLine;
+import fr.lip6.move.gal.process.ProcessController;
+import fr.lip6.move.gal.process.ProcessController.TimeOutException;
+import fr.lip6.move.gal.process.Runner;
+
 
 public class GreatSPNRunner {
 	
@@ -84,15 +92,16 @@ public class GreatSPNRunner {
 		cl.addArg("-varord");
 		
 		System.out.println("Running greatSPN : " + cl);
-		IStatus status = null;
+//		IStatus status = null;
+		Integer status = null;
 		try {
 			status = Runner.runTool(100, cl);
-			ByteArrayOutputStream stdOutput = new ByteArrayOutputStream();
-
-			Runner.runTool(100, cl, stdOutput, true);
-			
+//			ByteArrayOutputStream stdOutput = new ByteArrayOutputStream();
+			String stdOutput = "./outPut.txt"; 
+			Runner.runTool(100, cl, new File(stdOutput), true);
+//			Runner.runTool(100, cl);
 			//System.out.println(stdOutput.toString());
-			BufferedReader reader = new BufferedReader(new StringReader(stdOutput.toString()));
+			BufferedReader reader = new BufferedReader(new FileReader(stdOutput));
 			String line;
 			while ((line = reader.readLine()) != null) {
                 
@@ -107,12 +116,20 @@ public class GreatSPNRunner {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (TimeOutException e) {
+		}
+//		} catch (TimeOutException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (status == null || !status.isOK()) {
+//			throw new RuntimeException("Could run greatspn executable ." + cl);
+//		}
+		catch (TimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if (status == null || !status.isOK()) {
-			throw new RuntimeException("Could run greatspn executable ." + cl);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
