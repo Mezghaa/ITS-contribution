@@ -55,7 +55,7 @@ public class PNMLToGreatSPN {
 		
 		pwdef.println("|256\n%\n|\n") ; // header for def files
 		
-		pwnet.append("|0|\n|\nf 0 ") ; // number of mrking parameters
+		pwnet.append("|0|\n|\nf 0 ") ; // number of marking parameters
 		
 		long nbplaces = page.getObjects().stream().filter(x -> x instanceof Place).count();
 		pwnet.append(nbplaces+" ");
@@ -109,7 +109,7 @@ public class PNMLToGreatSPN {
 				pwnet.append("1.0 1.0 ") ;  // position of name tag
 				pwnet.append("1.0 1.0 ") ;  // position of ??
 				// Definition not clear on order of pos  ??? cimer GSPN
-				pwnet.append("0 \n"); // free 0 !!! gratos !! "&@`#  GSPN	
+				pwnet.append("0\n"); // free 0 !!! gratos !! "&@`#  GSPN	
 				
 				for (Arc arc : t.getInArcs()) {
 					printArc(pwnet, placeMap, arc);
@@ -118,7 +118,7 @@ public class PNMLToGreatSPN {
 				for (Arc arc : t.getOutArcs()) {
 					printArc(pwnet, placeMap, arc);
 				}
-				pwnet.append("   0 \n"); // number of inhibitor arcs
+				pwnet.append("   0\n"); // number of inhibitor arcs
 			}
 		}
 		getLog().info("Transformed " + nbtrans + " transitions.");
