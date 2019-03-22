@@ -92,8 +92,7 @@ public class StructuralToGreatSPN {
 			// Definition not clear on order of pos  ??? cimer GSPN
 			pwnet.append("0\n"); // free 0 !!! gratos !! "&@`#  GSPN	
 				
-			int ti = 0;
-			SparseIntArray inputs = sr.getFlowPT().getColumn(ti);
+			SparseIntArray inputs = sr.getFlowPT().getColumn(tid);
 			for (int i = 0; i < inputs.size(); i++) {
 				int pid = placeMap.get(inputs.keyAt(i));
 				int val = inputs.valueAt(i);
@@ -103,7 +102,7 @@ public class StructuralToGreatSPN {
 				pwnet.append("0 "); // number of inflexion points
 				pwnet.append("0\n") ; // delimiter gratos cimer GSPN. NOTE : no whitespace after this 0 or gspn will crash !
 			}
-			inputs = sr.getFlowTP().getColumn(ti);			
+			inputs = sr.getFlowTP().getColumn(tid);			
 			pwnet.append("   "+inputs.size()+"\n");
 			for (int i = 0; i < inputs.size(); i++) {
 				int pid = placeMap.get(inputs.keyAt(i));
